@@ -3,40 +3,18 @@ import { useState } from 'react';
 import './Carousel.scss';
 import { CarouselCard } from './CarouselCard/CarouselCard';
 
-/* const Carousel: React.FC = () => (
-  <div className="Carousel">
-    <ul className="Carousel__list">
-      <li>
-        <img src="./img/1.png" alt="1" />
-      </li>
-      <li>
-        <img src="./img/1.png" alt="2" />
-      </li>
-      <li>
-        <img src="./img/1.png" alt="3" />
-      </li>
-      <li>
-        <img src="./img/1.png" alt="4" />
-      </li>
-    </ul>
-
-    <button type="button">Prev</button>
-    <button type="button">Next</button>
-  </div>
-);
-*/
-type Prop = {
+type Props = {
   images: string[];
-  itemWidth: number;
+  imageWidth: number;
   frameSize: number;
   step: number;
   animationDuration: number;
   infinite: boolean;
 };
 
-const Carousel: React.FC<Prop> = ({
+const Carousel: React.FC<Props> = ({
   images,
-  itemWidth,
+  imageWidth,
   frameSize,
   step,
   animationDuration,
@@ -46,40 +24,41 @@ const Carousel: React.FC<Prop> = ({
   const maxCurrentImage =
     Math.min(images.length - frameSize, images.length - step) + 1;
 
-  const moveImages = (s: number) => {
+  const moveImages = (steps: number) => {
     if (infinite) {
       switch (true) {
-        case currentImg === maxCurrentImage && currentImg + s > maxCurrentImage:
+        case currentImg === maxCurrentImage &&
+          currentImg + steps > maxCurrentImage:
           setCurrentImage(1);
           break;
 
-        case currentImg === 1 && currentImg + s < 1:
+        case currentImg === 1 && currentImg + steps < 1:
           setCurrentImage(maxCurrentImage);
           break;
 
-        case currentImg + s > maxCurrentImage:
+        case currentImg + steps > maxCurrentImage:
           setCurrentImage(maxCurrentImage);
           break;
 
-        case currentImg + s < 1:
+        case currentImg + steps < 1:
           setCurrentImage(1);
           break;
 
         default:
-          setCurrentImage(currentImg + s);
+          setCurrentImage(currentImg + steps);
       }
     } else {
       switch (true) {
-        case currentImg + s > maxCurrentImage:
+        case currentImg + steps > maxCurrentImage:
           setCurrentImage(maxCurrentImage);
           break;
 
-        case currentImg + s < 1:
+        case currentImg + steps < 1:
           setCurrentImage(1);
           break;
 
         default:
-          setCurrentImage(currentImg + s);
+          setCurrentImage(currentImg + steps);
       }
     }
   };
@@ -89,13 +68,13 @@ const Carousel: React.FC<Prop> = ({
       <div
         className="Carousel__container"
         style={{
-          width: `${itemWidth * frameSize}px`,
+          width: `${imageWidth * frameSize}px`,
         }}
       >
         <ul
           className="Carousel__list"
           style={{
-            transform: `translateX(-${(currentImg - 1) * itemWidth}px)`,
+            transform: `translateX(-${(currentImg - 1) * imageWidth}px)`,
             transitionDuration: `${animationDuration}ms`,
           }}
         >
@@ -103,21 +82,10 @@ const Carousel: React.FC<Prop> = ({
             <CarouselCard
               image={image}
               key={i}
-              itemWidth={itemWidth}
+              imageWidth={imageWidth}
               imageNumber={i}
             />
           ))}
-          {/* <li key={image}>
-                <img
-                  src={image}
-                  alt={`emoji${i}`}
-                  className="Carousel__img"
-                  style={{
-                    width: `${itemWidth}px`,
-                    height: `${itemWidth}px`,
-                  }}
-                />
-              </li> */}
         </ul>
       </div>
 

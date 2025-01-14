@@ -3,29 +3,29 @@ import Carousel from './components/Carousel';
 import './App.scss';
 interface State {
   images: string[];
-  itemWidth: number;
+  imageWidth: number;
   frameSize: number;
   step: number;
   animationDuration: number;
   infinite: boolean;
 }
 const images = [
-  '../public/img/1.png',
-  '../public/img/2.png',
-  '../public/img/3.png',
-  '../public/img/4.png',
-  '../public/img/5.png',
-  '../public/img/6.png',
-  '../public/img/7.png',
-  '../public/img/8.png',
-  '../public/img/9.png',
-  '../public/img/10.png',
+  '../img/1.png',
+  '../img/2.png',
+  '../img/3.png',
+  '../img/4.png',
+  '../img/5.png',
+  '../img/6.png',
+  '../img/7.png',
+  '../img/8.png',
+  '../img/9.png',
+  '../img/10.png',
 ];
 
 class App extends React.Component<{}, State> {
   state = {
     images,
-    itemWidth: 130,
+    imageWidth: 130,
     frameSize: 3,
     step: 3,
     animationDuration: 1000,
@@ -33,7 +33,7 @@ class App extends React.Component<{}, State> {
   };
 
   render() {
-    const { itemWidth, frameSize, step, animationDuration, infinite } =
+    const { imageWidth, frameSize, step, animationDuration, infinite } =
       this.state;
 
     const onChangeImages = (
@@ -48,15 +48,13 @@ class App extends React.Component<{}, State> {
 
     return (
       <div className="App">
-        {/* eslint-disable-next-line */}
-        {/*<h1>Carousel with {images.length} images</h1>*/}
         <h1 className="App__title" data-cy="title">
           Carousel has {images.length} images
         </h1>
 
         <Carousel
           images={images}
-          itemWidth={itemWidth}
+          imageWidth={imageWidth}
           frameSize={frameSize}
           step={step}
           animationDuration={animationDuration}
@@ -72,7 +70,7 @@ class App extends React.Component<{}, State> {
                 type="number"
                 name="itemWidth"
                 id="itemId"
-                value={itemWidth}
+                value={imageWidth}
                 min={50}
                 max={250}
                 step={5}
@@ -122,13 +120,12 @@ class App extends React.Component<{}, State> {
                 type="checkbox"
                 name="infinite"
                 id="infinite"
+                checked={infinite}
                 onClick={() => this.setState({ infinite: !infinite })}
               />
             </label>
           </fieldset>
         </form>
-
-        {/*<Carousel />*/}
       </div>
     );
   }

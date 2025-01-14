@@ -1,23 +1,21 @@
 import React from 'react';
-import './CarouselCard.scss';
 type Props = {
   image: string;
-  itemWidth: number;
+  imageWidth: number;
   imageNumber: number;
 };
 export const CarouselCard: React.FC<Props> = ({
   image,
-  itemWidth,
+  imageWidth,
   imageNumber,
 }) => (
   <li>
     <img
       src={image}
       alt={`emoji${imageNumber}`}
-      className="Carousel__img"
       style={{
-        width: `${itemWidth}px`,
-        height: `${itemWidth}px`,
+        width: `${imageWidth}px`,
+        height: `${imageWidth}px`,
       }}
     />
   </li>
